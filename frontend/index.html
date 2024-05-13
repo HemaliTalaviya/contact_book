@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Registration Form</title>
+  <link rel="stylesheet" href="./css/style.css">
+</head>
+<body>
+  <div class="container">
+    <h2>CREATE CONTACT</h2>
+    <form>
+      <div class="form-group">
+        <label for="username">Username:</label>
+        <input type="text" id="username" name="username" required>
+      </div>
+      <div class="form-group">
+        <label for="officeNo">Office Number:</label>
+        <input type="tel" id="officeNo" name="officeNo" required>
+      </div>
+      <div class="form-group">
+        <label for="homeNo">Home Number:</label>
+        <input type="tel" id="homeNo" name="homeNo" required>
+      </div>
+      <div class="form-group">
+        <label for="city">City :</label>
+        <input type="text" id="city" name="city" required>
+      </div>
+      <button type="button" onclick="createContact()">Add Contact</button>
+    </form>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script>
+
+       function createContact(){
+        const fName = document.getElementById('username').value;
+        // alert(fName)
+        const oNo = document.getElementById('officeNo').value;
+        // alert(oNo)
+        const hNO = document.getElementById('homeNo').value;
+        // alert(hNO)
+        const city = document.getElementById('city').value;
+        // alert(city)
+
+        const data = {
+            fullname:fName,
+            officeNo:oNo,
+            homeNo:hNO,
+            city:city
+        }
+        console.log(data)
+        
+        // fetch("http://localhost:3000/",{
+        //     method:"POST",
+        //     headers:{
+        //         "content-type":"application/json"
+        //     },
+        //     body:JSON.stringify(data)   
+        // }).then((response) => {
+        //             return response.json(); // Parse response body as JSON and return the promise
+        //         })
+        //         .then((data) => {
+        //             console.log("Response data:", data); // Log the retrieved data
+        //         })
+        //         .catch((error) => {
+        //             console.log("Error:", error); // Log any errors
+        //         });
+
+        axios.post("http://localhost:3000/",data).then(response =>{
+            console.log('data:',response.data)
+        }).catch(Error =>{
+            console.log(Error);
+        })
+        window.location.href = "http://127.0.0.1:5500/frontend/Edit-contact.html"
+       }
+
+    </script>
+  </div>
+</body>
+</html>
